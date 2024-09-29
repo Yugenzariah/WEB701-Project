@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import Register from './Register';
+import Dashboard from './Dashboard';
+import Profile from './Profile';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/" element={<h1>Welcome to the MERN stack application</h1>} />
+      </Routes>
+    </Router>
   );
 }
 
-export default App;
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/" element={<h1>Welcome to the MERN stack application</h1>} />
+      </Routes>
+    </Router>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/" element={<h1>Welcome to the MERN stack application</h1>} />
+      </Routes>
+    </Router>
+  );
+}
