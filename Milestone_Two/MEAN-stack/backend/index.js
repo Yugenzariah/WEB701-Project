@@ -2,23 +2,27 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
+const authRoutes = require('./routes/auth');
+const PORT = process.env.PORT || 5000;
+
+// Middleware
 app.use(express.json());
 app.use(cors());
 
+// Routes
+app.get('/', async (req, res) => {
+  res.send('MEAN Stack Backend Running');
+});
+app.use('/auth', authRoutes);
+
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/mean_stack_db', {
+mongoose.connect('mongodb+srv://Keith:KWZdeLGqLbpkGujb@web701-project.nzmvq.mongodb.net/', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => {
   console.log('Connected to MongoDB');
 });
 
-// Define a simple route
-app.get('/', (req, res) => {
-  res.send('MEAN Stack Backend Running');
-});
-
-const PORT = 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
