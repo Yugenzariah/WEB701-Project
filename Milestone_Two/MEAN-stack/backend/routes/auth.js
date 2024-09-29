@@ -4,6 +4,20 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const router = express.Router();
 
+// Middleware to protect routes
+const authenticateJWT = (req, res, next) => {
+  const token = req.header('Authorization');
+  if (!token) return res.status(401).json({ message: 'Access denied. No token provided.' });
+
+  try {
+    const decoded = jwt.verify(token, 'jwt_secret'); // Verify the token with secret key
+    req.user = decoded;
+    next();
+  } catch (ex) {
+    res.status(400).json({ message: 'Invalid token.' });
+  }
+};
+
 // User registration route
 router.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
@@ -22,9 +36,13 @@ router.post('/login', async (req, res) => {
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
 
-// Generate JWT token when user logs in successfully 
   const token = jwt.sign({ userId: user._id }, 'jwt_secret', { expiresIn: '1h' });
   res.json({ token });
+});
+
+// Protected route
+router.get('/dashboard', authenticateJWT, (req, res) => {
+  res.json({ message: 'Welcome to the protected dashboard!' });
 });
 
 module.exports = router;
