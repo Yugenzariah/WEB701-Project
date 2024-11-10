@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import UserProfile from './pages/UserProfile';
+import ProductRegistrationPage from './pages/ProductRegistrationPage';
 import ('./App.css')
 
 function App() {
@@ -14,11 +15,11 @@ function App() {
             </div>
                 <Navbar />
                 <Routes>
+                    <Route path="/" element={<h2>Home Page - Please select a page</h2>} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/user-profile" element={<UserProfile />} />
-                    {/* This is where the default homepage will be added */}
-                    <Route path="/" element={<h2>Home Page - Please select a page</h2>} />
+                    <Route path="/register-product" element={<ProductRegistrationPage />} />
                 </Routes>
         </Router>
     );

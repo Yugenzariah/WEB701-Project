@@ -1,17 +1,16 @@
 const express = require('express');
-const cors = require ('cors');
+const cors = require('cors');
+const authRoutes = require('./routes/authRoutes');
+const productRoutes = require('./routes/productRoutes');
 const app = express();
-const authRoutes = require('./routes/authRoutes')
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Routes
-app.get('/', (req, res) => { // Test route
-    res.send('API is working');
-});
-
+// Register auth routes
 app.use('/api/auth', authRoutes);
+
+// Register product routes
+app.use('/api/products', productRoutes);
 
 module.exports = app;
