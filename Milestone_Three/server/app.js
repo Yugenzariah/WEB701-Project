@@ -1,12 +1,15 @@
 const express = require('express');
 const app = express();
+const authRoutes = require('./routes/authRoutes')
 
 // Middleware
 app.use(express.json());
 
-// Basic route for testing
-app.get('/', (req, res) => {
+// Routes
+app.get('/', (req, res) => { // Test route
     res.send('API is working');
 });
+
+app.use('/api/auth', authRoutes);
 
 module.exports = app;
