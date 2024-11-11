@@ -39,6 +39,26 @@ const UserSchema = new mongoose.Schema({
             },
         },
     ],
+    transactionHistory: [
+        {
+            type: {
+                type: String,
+                required: true,
+            },
+            productName: {
+                type: String,
+                required: true,
+            },
+            amount: {
+                type: Number,
+                required: true,
+            },
+            timestamp: {
+                type: Date,
+                default: Date.now,
+            },
+        },
+    ],
 },{timestamps: true});
 
 

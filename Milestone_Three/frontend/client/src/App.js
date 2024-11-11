@@ -9,6 +9,7 @@ import RegisterPage from './pages/RegisterPage';
 import UserProfile from './pages/UserProfile';
 import ProductRegistrationPage from './pages/ProductRegistrationPage';
 import UserDashboard from './pages/UserDashboard';
+import TransactionHistoryPage from './pages/TransactionHistoryPage';
 import './App.css';
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
                 <Route path="/user-profile" element={<UserProfile />} />
                 <Route path="/register-product" element={<ProductRegistrationPage />} />
                 <Route path="/dashboard" element={<UserDashboard />} />
+                <Route path="/transaction-history" element={<TransactionHistoryPage />} />
             </Routes>
         </Router>
     );

@@ -44,22 +44,22 @@ exports.acquireProduct = async (req, res) => {
             return res.status(400).json({ message: 'Insufficient tokens' });
         }
 
-        // Deduct tokens from buyer
         buyer.tokenBalance -= product.price;
+        buyer.transactionHistory.push({
+            type: 'purchase',
+            productName: product.name,
+            amount: product.price,
+        });
         await buyer.save();
 
-        // Add tokens to owner's balance
-        const productOwner = await User.findById(product.owner);
-        productOwner.tokenBalance += product.price;
-
-        // Add a structured notification for the product owner
-        const notificationMessage = `${buyer.name} bought your product "${product.name}".`;
-        productOwner.notifications.push({
-            type: 'purchase',
-            message: notificationMessage,
-            timestamp: new Date(),
+        const seller = await User.findById(product.owner);
+        seller.tokenBalance += product.price;
+        seller.transactionHistory.push({
+            type: 'sale',
+            productName: product.name,
+            amount: product.price,
         });
-        await productOwner.save();
+        await seller.save();
 
         res.status(200).json({ message: 'Product acquired successfully', user: buyer });
     } catch (error) {

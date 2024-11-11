@@ -54,8 +54,17 @@ router.post('/login', async (req, res) => {
     }
 });
 
+// Get transaction history
+router.get('/transaction-history', auth, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select('transactionHistory');
+        res.status(200).json(user.transactionHistory);
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to fetch transaction history', error: error.message });
+    }
+});
+
 // Router to use auth middleware to ensure only authenticated users has access
 router.get('/me', auth, getUserData);
 
 module.exports = router;
-
