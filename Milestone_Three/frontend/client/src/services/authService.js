@@ -10,7 +10,9 @@ export const register = async (name, email, password) => {
 
 // Login user
 export const login = async (email, password) => {
+    console.log("Attempting to login with:", email, password); // Add this line for debugging
     const response = await axios.post(`${API_URL}/login`, { email, password });
+    console.log("Response from backend:", response.data); // Log the response from backend
     return response.data;
 };
 

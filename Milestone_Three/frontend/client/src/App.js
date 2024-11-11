@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Navbar from './components/Navbar';
 import ProductListPage from './pages/ProductListPage';
 import LoginPage from './pages/LoginPage';
@@ -14,6 +16,9 @@ function App() {
         <Router>
             <div className="heading-container">
                 <h1>Welcome to YEN-Yang</h1>
+            </div>
+            <div>
+                <ToastContainer />
             </div>
             <Navbar />
             <Routes>

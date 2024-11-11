@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../services/authService';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
@@ -12,13 +14,24 @@ const LoginPage = () => {
         e.preventDefault();
         try {
             const data = await login(email, password);
-            localStorage.setItem('token', data.token); // Store token in local storage
-            alert('Login successful!');
-            navigate('/user-profile'); // Navigate to user profile after login
+            console.log("Data received after login:", data); // Log data to see the backend response
+    
+            localStorage.setItem('token', data.token);
+    
+            // Display notifications if there are any
+            if (data.notifications && data.notifications.length > 0) {
+                data.notifications.forEach((notification) => {
+                    toast.info(notification.message);
+                });
+            }
+    
+            toast.success('Login successful!');
+            navigate('/user-profile'); 
         } catch (err) {
+            console.error("Login error:", err); // Log errors if any occur
             setError('Invalid credentials');
         }
-    };
+    };    
 
     return (
         <div className="container">

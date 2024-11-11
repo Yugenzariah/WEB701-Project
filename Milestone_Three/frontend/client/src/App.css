@@ -158,3 +158,11 @@ nav {
   max-width: 300px;
   background-color: #fff;
 }
+
+/* Customizing the close (X) button in toast notifications */
+.Toastify__close-button {
+  font-size: 14px;
+  width: 20px; 
+  height: 20px;  
+  line-height: 1; 
+}

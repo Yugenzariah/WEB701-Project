@@ -19,6 +19,26 @@ const UserSchema = new mongoose.Schema({
         type: Number,
         default: 100,
     }, 
+    notifications: [
+        {
+            type: {
+                type: String,
+                required: true,
+            },
+            message: {
+                type: String,
+                required: true,
+            },
+            timestamp: {
+                type: Date,
+                default: Date.now,
+            },
+            seen: {
+                type: Boolean,
+                default: false,
+            },
+        },
+    ],
 },{timestamps: true});
 
 

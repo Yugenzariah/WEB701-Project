@@ -54,12 +54,6 @@ router.post('/login', async (req, res) => {
     }
 });
 
-// Protected route test
-router.get('/me', auth, async(req, res) => {
-    const user = await User.findById(req.user.id).select('-password');
-    res.json(user);
-});
-
 // Router to use auth middleware to ensure only authenticated users has access
 router.get('/me', auth, getUserData);
 

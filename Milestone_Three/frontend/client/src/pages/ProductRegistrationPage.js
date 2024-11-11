@@ -17,12 +17,12 @@ const ProductRegistrationPage = () => {
                 { name, description, price },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
-            setSuccess('Product registered successfully!');
+            setSuccess('Item registered successfully!');
             setName('');
             setDescription('');
             setPrice('');
         } catch (err) {
-            setError('Failed to register product');
+            setError('Failed to register item.');
         }
     };
 

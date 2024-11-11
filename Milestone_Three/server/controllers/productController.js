@@ -31,7 +31,7 @@ exports.getAllProducts = async (req, res) => {
 // Acquire products
 exports.acquireProduct = async (req, res) => {
     const { productId } = req.body;
-    const userId = req.user.id;
+    const buyerId = req.user.id;
 
     try {
         const product = await Product.findById(productId);
@@ -39,20 +39,29 @@ exports.acquireProduct = async (req, res) => {
             return res.status(404).json({ message: 'Product not found' });
         }
 
-        const user = await User.findById(userId);
-        if (user.tokenBalance < product.price) {
+        const buyer = await User.findById(buyerId);
+        if (buyer.tokenBalance < product.price) {
             return res.status(400).json({ message: 'Insufficient tokens' });
         }
 
-        // Deduct tokens from beneficiary and add tokens to product owner
-        user.tokenBalance -= product.price;
-        await user.save();
+        // Deduct tokens from buyer
+        buyer.tokenBalance -= product.price;
+        await buyer.save();
 
+        // Add tokens to owner's balance
         const productOwner = await User.findById(product.owner);
         productOwner.tokenBalance += product.price;
+
+        // Add a structured notification for the product owner
+        const notificationMessage = `${buyer.name} bought your product "${product.name}".`;
+        productOwner.notifications.push({
+            type: 'purchase',
+            message: notificationMessage,
+            timestamp: new Date(),
+        });
         await productOwner.save();
 
-        res.status(200).json({ message: 'Product acquired successfully', user });
+        res.status(200).json({ message: 'Product acquired successfully', user: buyer });
     } catch (error) {
         console.error('Error acquiring product:', error.message);
         res.status(500).json({ message: 'Error acquiring product', error: error.message });
