@@ -27,6 +27,7 @@ const UserProfile = () => {
             <h2>User Profile</h2>
             <p><strong>Name:</strong> {user.name}</p>
             <p><strong>Email:</strong> {user.email}</p>
+            <button onClick={() => navigate('/edit-profile')}>Edit Profile</button>
             <button onClick={() => navigate('/register-product')}>Register Product</button>
             <button onClick={() => {
                 localStorage.removeItem('token');

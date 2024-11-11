@@ -114,6 +114,11 @@ nav {
   margin: 50px auto;
 }
 
+.profile-container button {
+  margin-bottom: 10px; 
+  width: 100%; 
+}
+
 /* Popup message styling */
 .success {
   color: green;

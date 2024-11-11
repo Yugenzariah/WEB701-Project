@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const auth = require('../middleware/authMiddleware');
-const { getUserData } = require ('../controllers/userController');
+const { getUserData, updateUserProfile } = require('../controllers/userController');
 
 
 // Register a new user
@@ -63,6 +63,9 @@ router.get('/transaction-history', auth, async (req, res) => {
         res.status(500).json({ message: 'Failed to fetch transaction history', error: error.message });
     }
 });
+
+// Update user profile details
+router.put('/update-profile', auth, updateUserProfile);
 
 // Router to use auth middleware to ensure only authenticated users has access
 router.get('/me', auth, getUserData);
