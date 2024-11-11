@@ -3,7 +3,8 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
-const auth = require('../middleware/authMiddleware')
+const auth = require('../middleware/authMiddleware');
+const { getUserData } = require ('../controllers/userController');
 
 
 // Register a new user
@@ -14,7 +15,7 @@ router.post('/register', async (req, res) => {
         if (user) {
             return res.status(400).json({ message: 'User already exists' });
         }
-        user = new User({ name, email, password });
+        user = new User({ name, email, password, tokenBalance: 100, });
         await user.save();
 
         // Generate JWT
@@ -57,6 +58,10 @@ router.post('/login', async (req, res) => {
 router.get('/me', auth, async(req, res) => {
     const user = await User.findById(req.user.id).select('-password');
     res.json(user);
-})
+});
+
+// Router to use auth middleware to ensure only authenticated users has access
+router.get('/me', auth, getUserData);
 
 module.exports = router;
+

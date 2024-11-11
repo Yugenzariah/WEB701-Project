@@ -12,7 +12,7 @@ const ProductRegistrationPage = () => {
         e.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.post(
+            await axios.post(
                 'http://localhost:5000/api/products/create',
                 { name, description, price },
                 { headers: { Authorization: `Bearer ${token}` } }

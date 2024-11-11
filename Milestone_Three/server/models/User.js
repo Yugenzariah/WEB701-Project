@@ -15,7 +15,12 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-});
+    tokenBalance: {
+        type: Number,
+        default: 100,
+    }, 
+},{timestamps: true});
+
 
 // Hash password before saving the user
 UserSchema.pre('save', async function (next) {

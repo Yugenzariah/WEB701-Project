@@ -1,5 +1,5 @@
 const express = require('express');
-const { createProduct, getAllProducts } = require('../controllers/productController');
+const { createProduct, getAllProducts, acquireProduct } = require('../controllers/productController');
 const auth = require('../middleware/authMiddleware');
 const router = express.Router();
 
@@ -8,5 +8,8 @@ router.post('/create', auth, createProduct);
 
 // Route to get all products
 router.get('/', getAllProducts);
+
+// Route for acquiring products
+router.post('/acquire', auth, acquireProduct);
 
 module.exports = router;
