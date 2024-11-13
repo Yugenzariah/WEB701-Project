@@ -8,4 +8,4 @@
 - Open project repository and navigate to the Milestone_Two directory
   
 3. Milestone_Three
-= Open project repository and navigate to the Milestone_Three directory
+- Open project repository and navigate to the Milestone_Three directory
