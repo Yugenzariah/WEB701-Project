@@ -4,7 +4,7 @@
 2. Open Project Repository
 3. Change Directory to Milestone_Three
 4. Install Dependencies
-- `npm install express cors jsonwebtoken bcryptjs mongoose`
+- `npm install express cors jsonwebtoken bcryptjs mongoose react-scripts`
 
 > Starting the Backend Server
 - Create an environment file by making a .env file and past the following text: `PORT = 5000
