@@ -14,7 +14,7 @@ const LoginPage = () => {
         e.preventDefault();
         try {
             const data = await login(email, password);
-            console.log("Data received after login:", data); // Log data to see the backend response
+            console.log("Data received after login:", data);
     
             localStorage.setItem('token', data.token);
     
@@ -28,7 +28,7 @@ const LoginPage = () => {
             toast.success('Login successful!');
             navigate('/user-profile'); 
         } catch (err) {
-            console.error("Login error:", err); // Log errors if any occur
+            console.error("Login error:", err);
             setError('Invalid credentials');
         }
     };    
