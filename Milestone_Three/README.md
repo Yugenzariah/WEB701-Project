@@ -7,9 +7,6 @@
 - `npm install express cors jsonwebtoken bcryptjs mongoose react-scripts`
 
 > Starting the Backend Server
-- Create an environment file by making a .env file and past the following text: `PORT = 5000
-MONGO_URI = mongodb+srv://Keith:KWZdeLGqLbpkGujb@web701-project.nzmvq.mongodb.net/web701-project?retryWrites=true&w=majority
-JWT_SECRET = DAEVK7pkecGZx2grdtyL&YzMv$3!85NJP4m9qTbhQwUuj6HCW%`
 - In the console type in `node server.js` this will run the server and database.
 
 > Starting the Frontend
